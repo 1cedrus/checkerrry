@@ -17,3 +17,10 @@ export interface NetworkInfo {
   decimals: number;
   subscanUrl: string;
 }
+
+export enum BalanceType {
+  Free = 'Free Balance',
+  Locked = 'Locked Balance',
+  Reserved = 'Reserved Balance',
+  Frozen = 'Frozen Balance',
+}

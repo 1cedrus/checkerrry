@@ -1,6 +1,7 @@
 import { Balance } from '@polkadot/types/interfaces';
 
 export const toHuman = (value: Balance, decimal: number) => {
+  if (!value) return 0;
   let balanceString = value.toString();
 
   let redundant = 0;

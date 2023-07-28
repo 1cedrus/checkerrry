@@ -21,6 +21,7 @@ export default function AccountAddressInput() {
         variant='outline'
         textAlign='center'
         borderRadius='none'
+        border='1px solid gray'
         bgColor='white'
       />
       <InputRightElement width='4.5rem'>

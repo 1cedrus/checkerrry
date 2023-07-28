@@ -14,12 +14,14 @@ export default function AccountCard() {
       flexDirection='row'
       width='40rem'
       borderRadius='none'
-      padding='1rem'
+      padding='1.5rem'
       boxShadow='5px 5px gray'
       border='solid 1px gray'>
       <Identicon value={address} theme={'polkadot'} />
       <CardBody>
-        <Text size='sm'>{address}</Text>
+        <Text size='sm' textAlign='center'>
+          {address}
+        </Text>
       </CardBody>
     </Card>
   );
