@@ -1,7 +1,7 @@
 import { Card, CardBody, Text } from '@chakra-ui/react';
 import { Identicon } from '@polkadot/react-identicon';
-import { useAddressContext } from '../providers/AddressProvider.tsx';
-import { isValidAddressPolkadotAddress } from '../../utils/validates.ts';
+import { useAddressContext } from 'components/providers/AddressProvider.tsx';
+import { isValidAddressPolkadotAddress } from 'utils/validates.ts';
 
 export default function AccountCard() {
   const { address } = useAddressContext();

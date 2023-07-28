@@ -1,7 +1,7 @@
 import { ApiPromise, WsProvider } from '@polkadot/api';
-import { NetworkInfo, Props } from '../../types.ts';
+import { NetworkInfo, Props } from 'types.ts';
 import { createContext, useContext, useState } from 'react';
-import { SUPPORTED_NETWORKS } from '../../utils/networks.ts';
+import { SUPPORTED_NETWORKS } from 'utils/networks.ts';
 import { useEffectOnce } from 'react-use';
 
 interface Api {

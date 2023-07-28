@@ -1,24 +1,11 @@
 import { Avatar, Card, CardBody, Heading, Text, Spinner, Box, Flex } from '@chakra-ui/react';
-import { useApisContext } from '../providers/ApisProvider.tsx';
-import { SUPPORTED_NETWORKS } from '../../utils/networks.ts';
-import { useAddressContext } from '../providers/AddressProvider.tsx';
+import { useApisContext } from 'components/providers/ApisProvider.tsx';
+import { SUPPORTED_NETWORKS } from 'utils/networks.ts';
+import { useAddressContext } from 'components/providers/AddressProvider.tsx';
 import { useState } from 'react';
 import { useAsync, useToggle } from 'react-use';
-import { isValidAddressPolkadotAddress } from '../../utils/validates.ts';
-import { Balance } from '@polkadot/types/interfaces';
-
-export const toHuman = (value: Balance, decimal: number) => {
-  let balanceString = value.toString();
-
-  let redundant = 0;
-
-  if (balanceString.length > decimal) {
-    redundant = balanceString.length - decimal;
-    balanceString = balanceString.slice(0, decimal);
-  }
-
-  return Number(balanceString) / Math.pow(10, decimal - redundant);
-};
+import { isValidAddressPolkadotAddress } from 'utils/validates.ts';
+import { toHuman } from 'utils/strings.ts';
 
 export default function AccountBalance() {
   const apis = useApisContext();

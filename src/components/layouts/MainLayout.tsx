@@ -1,7 +1,7 @@
 import { Flex } from '@chakra-ui/react';
-import AccountAddressInput from '../shared/AccountAddressInput.tsx';
-import AccountCard from '../shared/AccountCard.tsx';
-import AccountBalance from '../shared/AccountBalance.tsx';
+import AccountAddressInput from 'components/shared/AccountAddressInput.tsx';
+import AccountCard from 'components/shared/AccountCard.tsx';
+import AccountBalance from 'components/shared/AccountBalance.tsx';
 
 export default function MainLayout() {
   return (

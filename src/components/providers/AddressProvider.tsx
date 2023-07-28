@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from 'react';
-import { Props } from '../../types.ts';
+import { Props } from 'types.ts';
 
 interface AddressContextProps {
   address: string;

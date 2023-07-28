@@ -1,5 +1,5 @@
 import { Button, Input, InputGroup, InputRightElement } from '@chakra-ui/react';
-import { useAddressContext } from '../providers/AddressProvider.tsx';
+import { useAddressContext } from 'components/providers/AddressProvider.tsx';
 import { FormEvent, useState } from 'react';
 
 export default function AccountAddressInput() {
