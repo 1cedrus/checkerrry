@@ -31,6 +31,8 @@ export default function ApisProvider({ children }: Props) {
         console.log(`${network.name} has connected`);
 
         setApis((current) => {
+          // Because of React.Strict Mode makes two promises per network,
+          // So we use this to avoid including networks which already been added
           if (current.find((one) => one.network.name === network.name)) return current;
           return [...current, { api, apiReady: true, network }];
         });
