@@ -27,6 +27,12 @@ export default function AccountBalance() {
   const { address } = useAddressContext();
   const [balances, setBalances] = useState<Object>({});
 
+  if (!address) return;
+
+  if (!isValidAddressPolkadotAddress(address)) {
+    return <Text>Error occurred (Invalid address)</Text>;
+  }
+
   useAsync(async () => {
     if (!address || !apis) return;
 
@@ -39,12 +45,6 @@ export default function AccountBalance() {
       });
     });
   }, [address, apis]);
-
-  if (!address) return;
-
-  if (!isValidAddressPolkadotAddress(address)) {
-    return <Text>Error occurred (Invalid address)</Text>;
-  }
 
   return (
     <Box>
