@@ -17,7 +17,7 @@ import { useApisContext } from 'components/providers/ApisProvider.tsx';
 import { SUPPORTED_NETWORKS } from 'utils/networks.ts';
 import { useAddressContext } from 'components/providers/AddressProvider.tsx';
 import { useState } from 'react';
-import { useAsync, useToggle } from 'react-use';
+import { useAsync } from 'react-use';
 import { isValidAddressPolkadotAddress } from 'utils/validates.ts';
 import BalanceText from 'components/shared/Balance.tsx';
 import { BalanceType } from 'types.ts';
@@ -26,18 +26,11 @@ export default function AccountBalance() {
   const apis = useApisContext();
   const { address } = useAddressContext();
   const [balances, setBalances] = useState<Object>({});
-  const [error, setError] = useToggle(false);
 
   useAsync(async () => {
     if (!address || !apis) return;
 
-    setError(false);
     setBalances({});
-
-    if (!isValidAddressPolkadotAddress(address)) {
-      setError(true);
-      return;
-    }
 
     apis.forEach(({ api, network }) => {
       // @ts-ignore
@@ -47,11 +40,11 @@ export default function AccountBalance() {
     });
   }, [address, apis]);
 
-  if (error) {
+  if (!address) return;
+
+  if (!isValidAddressPolkadotAddress(address)) {
     return <Text>Error occurred (Invalid address)</Text>;
   }
-
-  if (!address) return;
 
   return (
     <Box>
@@ -83,31 +76,37 @@ export default function AccountBalance() {
                 </Flex>
 
                 <CardBody textAlign='left'>
-                  <BalanceText
-                    balance={(balances as any)[network.id].free}
-                    balanceType={BalanceType.Free}
-                    network={network}
-                  />
+                  {(balances as any)[network.id] && (
+                    <BalanceText
+                      balance={(balances as any)[network.id].free}
+                      balanceType={BalanceType.Free}
+                      network={network}
+                    />
+                  )}
                 </CardBody>
                 <AccordionIcon />
               </Card>
             </AccordionButton>
             <AccordionPanel>
-              <BalanceText
-                balance={(balances as any)[network.id].reserved}
-                balanceType={BalanceType.Reserved}
-                network={network}
-              />
-              <BalanceText
-                balance={(balances as any)[network.id].lockedBalance}
-                balanceType={BalanceType.Locked}
-                network={network}
-              />
-              <BalanceText
-                balance={(balances as any)[network.id].frozen}
-                balanceType={BalanceType.Frozen}
-                network={network}
-              />
+              {(balances as any)[network.id] && (
+                <>
+                  <BalanceText
+                    balance={(balances as any)[network.id].reserved}
+                    balanceType={BalanceType.Reserved}
+                    network={network}
+                  />
+                  <BalanceText
+                    balance={(balances as any)[network.id].lockedBalance}
+                    balanceType={BalanceType.Locked}
+                    network={network}
+                  />
+                  <BalanceText
+                    balance={(balances as any)[network.id].frozen}
+                    balanceType={BalanceType.Frozen}
+                    network={network}
+                  />
+                </>
+              )}
             </AccordionPanel>
           </AccordionItem>
         ))}

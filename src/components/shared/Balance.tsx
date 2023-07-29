@@ -10,7 +10,9 @@ interface BalanceProps extends Props {
 }
 
 export default function BalanceText({ balance, balanceType, network }: BalanceProps) {
-  if (!balance) return <></>;
+  if (!balance) {
+    return <Text color='#666'>{`${balanceType}: 0 ${network.symbol}`}</Text>;
+  }
 
   return (
     <>
