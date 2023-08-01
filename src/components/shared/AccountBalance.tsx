@@ -28,7 +28,7 @@ export default function AccountBalance() {
   const [balances, setBalances] = useState<Object>({});
 
   useAsync(async () => {
-    if (!address || !apis) return;
+    if (!address || !apis || !isValidAddressPolkadotAddress(address)) return;
 
     setBalances({});
 
