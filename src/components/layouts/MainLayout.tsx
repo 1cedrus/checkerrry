@@ -1,14 +1,13 @@
 import { Flex } from '@chakra-ui/react';
-import AccountAddressInput from 'components/shared/AccountAddressInput.tsx';
-import AccountCard from 'components/shared/AccountCard.tsx';
-import AccountBalance from 'components/shared/AccountBalance.tsx';
+import NavigateButton from 'components/layouts/NavigateButton.tsx';
+
+import { Outlet } from 'react-router-dom';
 
 export default function MainLayout() {
   return (
-    <Flex flexDirection='column' alignItems='center' gap='1rem' bgColor='#FFE4C4' minHeight='100vh'>
-      <AccountAddressInput />
-      <AccountCard />
-      <AccountBalance />
+    <Flex flexDirection='row' justifyContent='space-between' paddingY={'0.5rem'}>
+      <Outlet />
+      <NavigateButton />
     </Flex>
   );
 }

@@ -13,9 +13,9 @@ import {
   Spinner,
   Text,
 } from '@chakra-ui/react';
-import { useApisContext } from 'components/providers/ApisProvider.tsx';
+import { useApisContext } from 'providers/ApisProvider.tsx';
 import { SUPPORTED_NETWORKS } from 'utils/networks.ts';
-import { useAddressContext } from 'components/providers/AddressProvider.tsx';
+import { useAddressContext } from 'providers/AddressProvider.tsx';
 import { useState } from 'react';
 import { useAsync } from 'react-use';
 import { isValidAddressPolkadotAddress } from 'utils/validates.ts';

@@ -1,19 +1,19 @@
 import { Button, Input, InputGroup, InputRightElement } from '@chakra-ui/react';
-import { useAddressContext } from 'components/providers/AddressProvider.tsx';
 import { FormEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function AccountAddressInput() {
   const [address, setAddress] = useState<string>('');
-  const { setAddress: setAddressContext } = useAddressContext();
+  const navigate = useNavigate();
 
   const handleClick = (e: FormEvent<HTMLDivElement>) => {
     e.preventDefault();
 
-    setAddressContext(address);
+    navigate(`/balances/${address}`);
   };
 
   return (
-    <InputGroup as='form' onSubmit={handleClick} size='md' my='1rem' boxShadow='5px 5px gray' width='40rem'>
+    <InputGroup as='form' onSubmit={handleClick} size='md' boxShadow='5px 5px gray' width='40rem'>
       <Input
         value={address}
         onChange={(e) => setAddress(e.target.value)}

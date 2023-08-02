@@ -1,11 +1,8 @@
-import MainLayout from 'components/layouts/MainLayout.tsx';
+import { RouterProvider } from 'react-router-dom';
+import router from 'router.tsx';
 
 function App() {
-  return (
-    <>
-      <MainLayout />
-    </>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
