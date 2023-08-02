@@ -1,3 +1,3 @@
-# Balance Checker Demo
+# Checker Demo
 
-Use to check balance on Polkadot Chain.
+A balance-checking app and an interactive library for Polkadot Ecosystem
