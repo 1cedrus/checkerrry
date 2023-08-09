@@ -2,7 +2,7 @@ import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPane
 import { Props } from 'types.ts';
 import type { ConstantCodec } from '@polkadot/types/metadata/decorate/types';
 import type { PalletConstantMetadataLatest } from '@polkadot/types/interfaces';
-import useApi from '../../../hooks/useApi.ts';
+import useApi from '../../../../hooks/useApi.ts';
 import { useState } from 'react';
 import Description from './Description.tsx';
 
@@ -42,7 +42,7 @@ export default function Constants({ section }: ConstantsProps) {
         </AccordionButton>
         <AccordionPanel display='flex' flexDirection='column' gap='1rem'>
           {value.map((props) => (
-            <Description {...props} />
+            <Description key={props.meta.name.toString()} {...props} />
           ))}
         </AccordionPanel>
       </AccordionItem>

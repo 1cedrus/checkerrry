@@ -11,8 +11,8 @@ import {
 } from '@chakra-ui/react';
 import { Camel } from 'utils/strings.ts';
 import TextBox from 'components/shared/TextBox.tsx';
-import Constants from './Constants.tsx';
-// import Storage from './Storage.tsx';
+import Constants from './Constants';
+// import Storage from './Storage';
 
 export default function Metadata() {
   const { api, apiReady, network } = useApi('polkadot');
