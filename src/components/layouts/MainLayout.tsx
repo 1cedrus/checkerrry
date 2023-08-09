@@ -5,7 +5,7 @@ import { Outlet } from 'react-router-dom';
 
 export default function MainLayout() {
   return (
-    <Flex flexDirection='row' justifyContent='space-between' paddingY={'0.5rem'}>
+    <Flex justifyContent='center' paddingY={'0.5rem'}>
       <Outlet />
       <NavigateButton />
     </Flex>

@@ -13,7 +13,7 @@ export default function AccountAddressInput() {
   };
 
   return (
-    <InputGroup as='form' onSubmit={handleClick} size='md' boxShadow='5px 5px gray' width='40rem'>
+    <InputGroup as='form' onSubmit={handleClick} size='md' boxShadow='5px 5px gray' width='60rem'>
       <Input
         value={address}
         onChange={(e) => setAddress(e.target.value)}

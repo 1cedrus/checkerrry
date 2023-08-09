@@ -10,7 +10,7 @@ interface Api {
   network: NetworkInfo;
 }
 
-export const ApisContext = createContext<Api[] | undefined>([]);
+export const ApisContext = createContext<Record<string, Api>>({});
 
 export const useApisContext = () => {
   return useContext(ApisContext);
@@ -21,10 +21,18 @@ const generateProvider = (endPoint: string) => {
 };
 
 export default function ApisProvider({ children }: Props) {
-  const [apis, setApis] = useState<Api[]>([]);
+  const [apis, setApis] = useState<Record<string, Api>>(
+    Object.values(SUPPORTED_NETWORKS).reduce(
+      (currentValue, network) => ({
+        ...currentValue,
+        [network.id]: { apiReady: false, network },
+      }),
+      {},
+    ),
+  );
 
   useEffectOnce(() => {
-    SUPPORTED_NETWORKS.forEach((network) => {
+    Object.values(SUPPORTED_NETWORKS).forEach((network) => {
       const provider = generateProvider(network.provider);
 
       ApiPromise.create({ provider }).then((api) => {
@@ -33,8 +41,7 @@ export default function ApisProvider({ children }: Props) {
         setApis((current) => {
           // Because of React.Strict Mode makes two promises per network,
           // So we use this to avoid including networks which already been added
-          if (current.find((one) => one.network.name === network.name)) return current;
-          return [...current, { api, apiReady: true, network }];
+          return { ...current, [network.id]: { api, apiReady: true, network } };
         });
       });
     });

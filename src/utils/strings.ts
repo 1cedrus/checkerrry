@@ -13,3 +13,7 @@ export const toHuman = (value: Balance, decimal: number) => {
 
   return Number(balanceString) / Math.pow(10, decimal - redundant);
 };
+
+export function Camel(input: any) {
+  return input.charAt(0).toLowerCase() + input.slice(1);
+}
