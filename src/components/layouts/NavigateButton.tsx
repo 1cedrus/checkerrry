@@ -11,22 +11,15 @@ enum Location {
 }
 
 const defaultIndex = (pathname: string) => {
-  switch (pathname) {
-    case Location.Welcome:
-      return 0;
-    case Location.Balances:
-      return 1;
-    case Location.Metadata:
-      return 2;
-  }
+  if (Location.Welcome.match(pathname)?.length !== 0) return 0;
+  else if (Location.Balances.match(pathname)?.length !== 0) return 1;
+  else return 2;
 };
 
 export default function NavigateButton() {
   const navigate = useNavigate();
   const { isOpen, onToggle } = useDisclosure();
   const { pathname } = useLocation();
-
-  console.log(location);
 
   const CustomTab = React.forwardRef((props: any, ref: any) => {
     const tabProps = useTab({ ...props, ref });
