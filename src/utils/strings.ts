@@ -17,3 +17,7 @@ export const toHuman = (value: Balance, decimal: number) => {
 export function Camel(input: any) {
   return input.charAt(0).toLowerCase() + input.slice(1);
 }
+
+export const isEmptyArray = (array: any[]) => {
+  return array.length === 0;
+};

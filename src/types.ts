@@ -1,4 +1,6 @@
 import { ReactNode } from 'react';
+import { TypeDef } from '@polkadot/types/types';
+import { StorageEntryMetadataLatest } from '@polkadot/types/interfaces';
 
 export interface Props {
   className?: string;
@@ -23,4 +25,17 @@ export enum BalanceType {
   Locked = 'Locked Balance',
   Reserved = 'Reserved Balance',
   Frozen = 'Frozen Balance',
+}
+
+export interface TypeDefExt extends TypeDef {
+  withOptionActive?: boolean;
+}
+
+export type ParamsType = { name?: string; type: TypeDefExt }[];
+
+export interface StorageValueBase {
+  section: string;
+  method: string;
+  params: ParamsType;
+  meta: StorageEntryMetadataLatest;
 }
