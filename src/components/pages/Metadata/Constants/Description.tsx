@@ -1,10 +1,11 @@
-import { Box, Button, Flex, Heading } from '@chakra-ui/react';
+import { Box, Flex, Heading } from '@chakra-ui/react';
 import ReactMarkdown from 'react-markdown';
-import { Camel } from '../../../../utils/strings.ts';
+import { Camel } from 'utils/strings.ts';
 import { ConstValue } from './index.tsx';
 import { useState } from 'react';
-import useApi from '../../../../hooks/useApi.ts';
-import TextBox from '../../../shared/TextBox.tsx';
+import useApi from 'hooks/useApi.ts';
+import TextBox from 'components/shared/TextBox.tsx';
+import Button from 'components/shared/Button.tsx';
 
 export default function Description({ method, section, meta }: ConstValue) {
   const { api } = useApi('polkadot');
@@ -25,26 +26,8 @@ export default function Description({ method, section, meta }: ConstValue) {
         <ReactMarkdown>{`Description: ${meta.docs.join(' ') || 'None'}`}</ReactMarkdown>
         <ReactMarkdown>{`API Endpoint: \`api.const.${Camel(section)}.${Camel(method)}\``}</ReactMarkdown>
         <Box display='flex' gap='0.5rem'>
-          <Button
-            onClick={handleClick}
-            borderRadius='none'
-            width='5rem'
-            height='1.5rem'
-            boxShadow='2px 2px gray'
-            border='solid 1px gray'>
-            Try now
-          </Button>
-          {value && (
-            <Button
-              onClick={removeValue}
-              borderRadius='none'
-              width='5rem'
-              height='1.5rem'
-              boxShadow='2px 2px gray'
-              border='solid 1px gray'>
-              Remove
-            </Button>
-          )}
+          <Button onClick={handleClick}>Try now</Button>
+          {value && <Button onClick={removeValue}>Remove</Button>}
         </Box>
         {value && (
           <TextBox

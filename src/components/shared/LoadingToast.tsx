@@ -19,6 +19,7 @@ export default function LoadingToast({ children, done, props }: LoadingToastProp
         alignItems: 'center',
         paddingLeft: '1rem',
         height: '3rem',
+        bgColor: 'white',
       }}
       {...props}>
       <Box width='1.5rem'>{done ? <CheckIcon /> : <Spinner color='gray' size='md' />}</Box>

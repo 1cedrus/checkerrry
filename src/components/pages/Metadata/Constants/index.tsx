@@ -2,9 +2,9 @@ import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPane
 import { Props } from 'types.ts';
 import type { ConstantCodec } from '@polkadot/types/metadata/decorate/types';
 import type { PalletConstantMetadataLatest } from '@polkadot/types/interfaces';
-import useApi from '../../../../hooks/useApi.ts';
+import useApi from 'hooks/useApi.ts';
 import { useState } from 'react';
-import Description from './Description.tsx';
+import Description from 'components/pages/Metadata/Constants/Description.tsx';
 
 export interface ConstValueBase {
   method: string;

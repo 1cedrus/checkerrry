@@ -11,9 +11,14 @@ enum Location {
 }
 
 const defaultIndex = (pathname: string) => {
-  if (Location.Welcome.match(pathname)?.length !== 0) return 0;
-  else if (Location.Balances.match(pathname)?.length !== 0) return 1;
-  else return 2;
+  switch (pathname) {
+    case Location.Welcome:
+      return 0;
+    case Location.Metadata:
+      return 2;
+    default:
+      return 1;
+  }
 };
 
 export default function NavigateButton() {

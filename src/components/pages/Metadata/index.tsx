@@ -11,8 +11,8 @@ import {
 } from '@chakra-ui/react';
 import { Camel } from 'utils/strings.ts';
 import TextBox from 'components/shared/TextBox.tsx';
-import Constants from './Constants';
-// import Storage from './Storage';
+import Constants from 'components/pages/Metadata/Constants';
+import Storage from 'components/pages/Metadata/Storage';
 
 export default function Metadata() {
   const { api, apiReady, network } = useApi('polkadot');
@@ -35,7 +35,7 @@ export default function Metadata() {
               </AccordionButton>
               <AccordionPanel>
                 <Constants section={Camel(pallet.name)} />
-                {/*<Storage section={Camel(pallet.name)} />*/}
+                <Storage section={Camel(pallet.name)} />
               </AccordionPanel>
             </AccordionItem>
           ))}
