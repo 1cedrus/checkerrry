@@ -14,7 +14,7 @@ import TextBox from 'components/shared/TextBox.tsx';
 import Constants from 'components/pages/Metadata/Constants';
 import Storage from 'components/pages/Metadata/Storage';
 import { useApisContext } from 'providers/ApisProvider.tsx';
-import NetworkSelector from './NetworkSelector.tsx';
+import NetworkSelector from 'components/pages/Metadata/NetworkSelector.tsx';
 
 export default function Metadata() {
   const {
