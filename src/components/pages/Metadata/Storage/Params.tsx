@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { ParamsType } from 'types.ts';
-import useApi from 'hooks/useApi.ts';
 import { TypeDef, TypeDefInfo } from '@polkadot/types/types';
 import { Flex, Input, InputGroup, InputLeftAddon, Text } from '@chakra-ui/react';
 import Button from 'components/shared/Button.tsx';
 import { useToggle } from 'react-use';
 import TextBox from 'components/shared/TextBox.tsx';
+import { useApisContext } from 'providers/ApisProvider.tsx';
 
 interface ParamInputProps {
   params: ParamsType;
@@ -21,7 +21,9 @@ interface StateVal {
 }
 
 export default function Params({ params, section, method }: ParamInputProps) {
-  const { api } = useApi('polkadot');
+  const {
+    apiSelected: { api },
+  } = useApisContext();
   const [tryNow, setTryNow] = useToggle(false);
   const [value, setValue] = useState<string>('');
 
@@ -62,8 +64,9 @@ export default function Params({ params, section, method }: ParamInputProps) {
   };
 
   // TODO: Need to research about `multi` method more
+  // apiReady is being checked by parent component
   const onRun = async () => {
-    const value = await api.query[section][method].multi(paramValue.map((one) => one.value));
+    const value = await api!.query[section][method].multi(paramValue.map((one) => one.value));
     setValue(
       JSON.stringify(
         value.map((one) => one.toHuman()),

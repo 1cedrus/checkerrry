@@ -2,9 +2,9 @@ import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPane
 import { Props } from 'types.ts';
 import type { ConstantCodec } from '@polkadot/types/metadata/decorate/types';
 import type { PalletConstantMetadataLatest } from '@polkadot/types/interfaces';
-import useApi from 'hooks/useApi.ts';
 import { useState } from 'react';
 import Description from 'components/pages/Metadata/Constants/Description.tsx';
+import { useApisContext } from '../../../../providers/ApisProvider.tsx';
 
 export interface ConstValueBase {
   method: string;
@@ -20,16 +20,19 @@ interface ConstantsProps extends Props {
 }
 
 export default function Constants({ section }: ConstantsProps) {
-  const { api } = useApi('polkadot');
+  const {
+    apiSelected: { api },
+  } = useApisContext();
 
   // TODO: whether use useState or useMemo here
+  // apiReady is being checked by parent component
   const [value] = useState<ConstValue[]>(() => {
-    const methods = Object.keys(api.consts[section] || {}).sort((a, b) => a.localeCompare(b));
+    const methods = Object.keys(api!.consts[section] || {}).sort((a, b) => a.localeCompare(b));
 
     return methods.map((method) => ({
       method,
       section,
-      meta: (api.consts[section][method] as ConstantCodec).meta,
+      meta: (api!.consts[section][method] as ConstantCodec).meta,
     }));
   });
 

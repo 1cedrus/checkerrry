@@ -4,15 +4,29 @@ import { createContext, useContext, useState } from 'react';
 import { SUPPORTED_NETWORKS } from 'utils/networks.ts';
 import { useEffectOnce } from 'react-use';
 import { useToast } from '@chakra-ui/react';
-import LoadingToast from '../components/shared/LoadingToast.tsx';
+import LoadingToast from 'components/shared/LoadingToast.tsx';
+
+const UNFOUND_API = {
+  apiReady: false,
+  network: {},
+} as Api;
+
+const DEFAULT_NETWORK_PROVIDER = Object.values(SUPPORTED_NETWORKS).find((one) => one.id === 'polkadot')?.provider;
 
 interface Api {
-  api: ApiPromise;
+  api?: ApiPromise;
   apiReady: boolean;
   network: NetworkInfo;
 }
 
-export const ApisContext = createContext<Record<string, Api>>({});
+interface ApisContext {
+  apis: Record<string, Api>;
+  apiSelected: Api;
+  selectApi: (provider: string) => void;
+}
+
+// Skipping define default context value
+export const ApisContext = createContext<ApisContext>({} as ApisContext);
 
 export const useApisContext = () => {
   return useContext(ApisContext);
@@ -24,6 +38,7 @@ const generateProvider = (endPoint: string) => {
 
 export default function ApisProvider({ children }: Props) {
   const toast = useToast();
+  const [apiProvider, setApiProvider] = useState<string | undefined>(DEFAULT_NETWORK_PROVIDER);
 
   const [apis, setApis] = useState<Record<string, Api>>(
     Object.values(SUPPORTED_NETWORKS).reduce(
@@ -55,13 +70,17 @@ export default function ApisProvider({ children }: Props) {
         }
 
         setApis((current) => {
-          // Because of React.Strict Mode makes two promises per network,
-          // So we use this to avoid including networks which already been added
           return { ...current, [network.id]: { api, apiReady: true, network } };
         });
       });
     });
   });
 
-  return <ApisContext.Provider value={apis}>{children}</ApisContext.Provider>;
+  const api = Object.values(apis).find((one) => one.network.provider === apiProvider) || UNFOUND_API;
+
+  return (
+    <ApisContext.Provider value={{ apis, apiSelected: api, selectApi: setApiProvider }}>
+      {children}
+    </ApisContext.Provider>
+  );
 }

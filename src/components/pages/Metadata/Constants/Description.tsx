@@ -3,16 +3,19 @@ import ReactMarkdown from 'react-markdown';
 import { Camel } from 'utils/strings.ts';
 import { ConstValue } from './index.tsx';
 import { useState } from 'react';
-import useApi from 'hooks/useApi.ts';
 import TextBox from 'components/shared/TextBox.tsx';
 import Button from 'components/shared/Button.tsx';
+import { useApisContext } from 'providers/ApisProvider.tsx';
 
 export default function Description({ method, section, meta }: ConstValue) {
-  const { api } = useApi('polkadot');
+  const {
+    apiSelected: { api },
+  } = useApisContext();
   const [value, setValue] = useState<string>();
 
+  // apiReady is being checked by parent component
   const handleClick = () => {
-    setValue(api.consts[section] ? api.consts[section][method].toString() : '');
+    setValue(api!.consts[section] ? api!.consts[section][method].toString() : '');
   };
 
   const removeValue = () => {

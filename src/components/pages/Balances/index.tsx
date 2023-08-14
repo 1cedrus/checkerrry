@@ -15,9 +15,9 @@ export default function Balances() {
 
     setAddress(address);
   }, [address]);
-  5;
+
   return (
-    <Flex flex='1' flexDirection='column' alignItems='center' justifyContent='center' gap='1.rem'>
+    <Flex flex='1' flexDirection='column' alignItems='center' justifyContent='center' gap='1.5rem'>
       <AccountAddressInput />
       <AccountCard />
       <AccountBalance />

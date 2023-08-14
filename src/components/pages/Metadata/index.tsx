@@ -1,4 +1,3 @@
-import useApi from 'hooks/useApi.ts';
 import ErrorCard from 'components/shared/ErrorCard.tsx';
 import {
   Accordion,
@@ -7,24 +6,32 @@ import {
   AccordionItem,
   AccordionPanel,
   Box,
+  Flex,
   Heading,
 } from '@chakra-ui/react';
 import { Camel } from 'utils/strings.ts';
 import TextBox from 'components/shared/TextBox.tsx';
 import Constants from 'components/pages/Metadata/Constants';
 import Storage from 'components/pages/Metadata/Storage';
+import { useApisContext } from 'providers/ApisProvider.tsx';
+import NetworkSelector from './NetworkSelector.tsx';
 
 export default function Metadata() {
-  const { api, apiReady, network } = useApi('polkadot');
+  const {
+    apiSelected: { api, apiReady, network },
+  } = useApisContext();
 
   if (!apiReady) return <ErrorCard>Error occurred (Api have not ready yet)</ErrorCard>;
 
-  const meta = api.runtimeMetadata.asLatest;
+  const meta = api!.runtimeMetadata.asLatest;
   const pallets = meta.pallets.sort((a, b) => a.name.localeCompare(b.name.toString()));
 
   return (
     <TextBox props={{ marginLeft: '0.5rem', width: '60rem', flexDirection: 'column', alignItems: 'center' }}>
-      <Heading>{network.name}</Heading>
+      <Flex justifyContent='space-between' paddingBottom='1rem'>
+        <Heading>{network.name}</Heading>
+        <NetworkSelector />
+      </Flex>
       <Box flexDirection='column'>
         <Accordion allowMultiple>
           {pallets.map((pallet) => (

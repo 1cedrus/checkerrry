@@ -23,7 +23,7 @@ import BalanceText from 'components/shared/Balance.tsx';
 import { BalanceType } from 'types.ts';
 
 export default function AccountBalance() {
-  const apis = useApisContext();
+  const { apis } = useApisContext();
   const { address } = useAddressContext();
   const [balances, setBalances] = useState<Record<string, any>>({});
 
